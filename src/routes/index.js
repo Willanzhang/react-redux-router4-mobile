@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-ro
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addGun, removeGun, addGunAsync } from 'src/store/actions/auth'
-import DashBoard from 'pages/dashBoard'
 
 function asyncComponent(importComponent) {
   class AsyncComponent extends Component {
@@ -30,7 +29,9 @@ function asyncComponent(importComponent) {
   }
   return AsyncComponent;
 }
-const Auth = asyncComponent(() => import("pages/auth"))
+// const Auth = asyncComponent(() => import("pages/auth"))
+const Login = asyncComponent(() => import("container/login/login"))
+const Register = asyncComponent(() => import("container/register/register"))
 
 
 class Routers extends Component {
@@ -38,8 +39,8 @@ class Routers extends Component {
     const app = (<div>
       <Router>
         <div>
-          <DashBoard/>
-          <Route path="/login" exact component={Auth}></Route>
+          <Route path='/login' component={Login}></Route>
+          <Route path='/register' component={Register}></Route>
         </div>
       </Router>
     </div>)

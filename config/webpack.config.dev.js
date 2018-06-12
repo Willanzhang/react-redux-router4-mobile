@@ -86,7 +86,7 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'pages': path.resolve(__dirname, '../src/pages'),
-      'components': path.resolve(__dirname, '../src/components'),
+      'component': path.resolve(__dirname, '../src/component'),
       'container': path.resolve(__dirname, '../src/container'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/

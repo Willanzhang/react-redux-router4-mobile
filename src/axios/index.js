@@ -9,5 +9,6 @@ axios.interceptors.request.use(function(config) {
 // 拦截响应
 axios.interceptors.response.use(function(config) {
   // Toast.loading('加载中', 0)
+  Toast.hide()
   return config
 })

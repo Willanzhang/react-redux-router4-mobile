@@ -92,7 +92,7 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'pages': path.resolve(__dirname, '../src/pages'),
-      'components': path.resolve(__dirname, '../src/components'),
+      'component': path.resolve(__dirname, '../src/component'),
       'container': path.resolve(__dirname, '../src/container'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -169,7 +169,7 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.css$/,
+            test: /\.(css|less)$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -208,6 +208,9 @@ module.exports = {
                         ],
                       },
                     },
+                    {
+                      loader: require.resolve('less-loader') // compiles Less to CSS
+                    }
                   ],
                 },
                 extractTextPluginOptions
