@@ -93,6 +93,7 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'pages': path.resolve(__dirname, '../src/pages'),
       'component': path.resolve(__dirname, '../src/component'),
+      'common': path.resolve(__dirname, '../src/common'),
       'container': path.resolve(__dirname, '../src/container'),
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -152,7 +153,9 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              plugins: [
+                ["import", { libraryName: "antd-mobile", style: true }] // `style: true` for less
+              ],
               compact: true,
             },
           },

@@ -1,0 +1,143 @@
+body, html 
+  line-height: 1
+  font-weight: 200
+  font-family: 'PingFang SC', 'STHeitiSc-Light', 'Helvetica-Light', arial, sans-serif
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.text-right
+  text-align: right !important
+.text-center
+  text-align: center !important
+.text-left
+  text-align: left !important
+.clearfix
+  display: inline-block
+  &:after
+    content: '.'
+    height:0
+    line-height:0
+    clear:both
+    visibility:hidden
+/* 边框线 */
+
+.bline, .tline, .lline, .rline, .kline {
+  position: relative;
+}
+
+.bline:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  border-top: 1px solid #333;
+}
+
+.bline.xv:after {
+  border-top-style: dashed;
+}
+
+.tline:before, .lline:before, .rline:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+}
+
+.tline:before {
+  left: 0;
+  right: 0;
+  border-top: 1px solid #333;
+}
+
+.lline:before {
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid #333;
+}
+
+.rline:before {
+  bottom: 0;
+  right: -1px;
+  border-right: 1px solid #333;
+}
+
+.rline.xv:before {
+  border-right-style: dashed;
+}
+
+.dashed:before {
+  border-top-style: dashed;
+}
+@media only screen and (-webkit-device-pixel-ratio: 1.5) {
+  .kline:after {
+    width: 150%;
+    height: 150%;
+    -webkit-transform: scale(0.6666);
+    -moz-transform: scale(0.6666);
+    -ms-transform: scale(0.6666);
+    -o-transform: scale(0.6666);
+    transform: scale(0.6666);
+  }
+
+  .bline:after, .tline:before {
+    -webkit-transform: scaleY(0.6666);
+    -moz-transform: scaleY(0.6666);
+    -ms-transform: scaleY(0.6666);
+    -o-transform: scaleY(0.6666);
+    transform: scaleY(0.6666);
+  }
+
+  .lline:before, .rline:before {
+    -webkit-transform: scaleX(0.6666);
+    -moz-transform: scaleX(0.6666);
+    -ms-transform: scaleX(0.6666);
+    -o-transform: scaleX(0.6666);
+    transform: scaleX(0.6666);
+  }
+}
+
+@media only screen and (-webkit-device-pixel-ratio: 3) {
+  .kline:after {
+    width: 300%;
+    height: 300%;
+    -webkit-transform: scale(0.3333);
+    -moz-transform: scale(0.3333);
+    -ms-transform: scale(0.3333);
+    -o-transform: scale(0.3333);
+    transform: scale(0.3333);
+  }
+
+  .bline:after, .tline:before {
+    -webkit-transform: scaleY(0.3333);
+    -moz-transform: scaleY(0.3333);
+    -ms-transform: scaleY(0.3333);
+    -o-transform: scaleY(0.3333);
+    transform: scaleY(0.3333);
+  }
+
+  .lline:before, .rline:before {
+    -webkit-transform: scaleX(0.3333);
+    -moz-transform: scaleX(0.3333);
+    -ms-transform: scaleX(0.3333);
+    -o-transform: scaleX(0.3333);
+    transform: scaleX(0.3333);
+  }
+}
+
+@media(-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5)
+  .border-1px
+    &::after
+      -webkit-transform: scaley(0.7)
+      transform: scaley(0.7)
+
+@media(-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2)
+  .border-1px
+    &::after
+      -webkit-transform: scaley(0.5)
+      transform: scaley(0.5)
