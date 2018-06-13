@@ -4,8 +4,8 @@ import Logo from 'component/logo/logo'
    render() {
      return(
        <div>
-         <h2> 登录页</h2>
          <Logo></Logo >  
+         <h2> 登录页</h2>
        </div>
      )
    }

@@ -1,5 +1,5 @@
 import React from 'react'
-import './logo.less'
+import './logo.styl'
  class Logo extends React.Component{
    render() {
      return <div className="logo">
