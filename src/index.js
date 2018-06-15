@@ -9,13 +9,6 @@ import { Provider } from 'react-redux'
 import Router from 'src/routes'
 import './axios'
 import 'common/js/rem'
-console.log(store.getState())
-// 新建store
-// const  store = createStore(counter)
-
-// const init = store.getState()
-// console.log(init,' init')
-// 派发事件
 
 ReactDOM.render(
 	<Provider store={store}>

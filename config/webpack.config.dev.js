@@ -193,7 +193,8 @@ module.exports = {
                 },
               },
               {
-                loader: require.resolve('less-loader')
+                loader: require.resolve('less-loader'),
+                options: { javascriptEnabled: true }
               }
             ],
           },
@@ -202,6 +203,7 @@ module.exports = {
             use:  [
               require.resolve('style-loader'),
               require.resolve('css-loader'),
+              require.resolve('less-loader'),
               require.resolve('stylus-loader')
             ]
           },

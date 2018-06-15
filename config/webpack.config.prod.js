@@ -212,7 +212,8 @@ module.exports = {
                       },
                     },
                     {
-                      loader: require.resolve('less-loader') // compiles Less to CSS
+                      loader: require.resolve('less-loader'), // compiles Less to CSS
+                      options: { javascriptEnabled: true } // 解决less 版本过高 antd-mobile 报错
                     }
                   ],
                 },
