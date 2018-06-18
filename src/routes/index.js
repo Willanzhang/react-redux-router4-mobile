@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-ro
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addGun, removeGun, addGunAsync } from 'src/store/actions/auth'
+import AuthRoute from 'component/authRoute/authRoute'
 
 function asyncComponent(importComponent) {
   class AsyncComponent extends Component {
