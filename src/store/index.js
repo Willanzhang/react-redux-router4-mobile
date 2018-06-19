@@ -1,11 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import gun from './reducers/gun'
 import auth from './reducers/auth'
+import user from './reducers/user'
 import thunk from 'redux-thunk'
 
 const reducers = combineReducers({
 	gun,
-	auth
+	auth,
+	user
 })
 
 const reduxDevtools = window.devToolsExtension? window.devToolsExtension(): f => f

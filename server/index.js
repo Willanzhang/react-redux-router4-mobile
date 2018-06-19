@@ -3,9 +3,9 @@ const userRouter = require('./user')
 const app =express()
 
 app.use('/user', userRouter)
-app.get('/',function (req, res) {
-    res.send('<h1>hello word</h1>')
-})
+// app.get('/',function (req, res) {
+//     res.send('<h1>hello word</h1>')
+// })
 
 // app.get('/data', function (req,res) {
 //     res.json({

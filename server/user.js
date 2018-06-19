@@ -1,7 +1,20 @@
 const express = require('express')
 const Router = express.Router()
+const models = require('./model')
+const User = model.getModel('user')
 
-Router.get('./info', function(req, res) {
-  res.send('123')
+Router.get('/list', function(req, res) {
+  User.find({}, function(err, doc) {
+    return res.json(doc)
+  })
+  res.json({errCode: 1})
+})
+Router.get('/info', function(req, res) {
+  // 用户有没有cookie
+  res.json({errCode: 1})
+})
+Router.get('/register', function(req, res) {
+  // 用户有没有cookie
+  res.json({errCode: 1})
 })
 module.exports = Router
