@@ -1,13 +1,16 @@
 const express = require('express')
 const Router = express.Router()
 const models = require('./model')
-const User = model.getModel('user')
-
+const User = models.getModel('user')
 Router.get('/list', function(req, res) {
   User.find({}, function(err, doc) {
-    return res.json(doc)
+    if (!err) {
+      console.log(doc, 'doc');
+      return res.json(doc)
+    } else {
+      console.log(err);
+    }
   })
-  res.json({errCode: 1})
 })
 Router.get('/info', function(req, res) {
   // 用户有没有cookie
