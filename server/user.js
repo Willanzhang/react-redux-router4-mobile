@@ -12,21 +12,21 @@ Router.get('/list', function(req, res) {
 })
 Router.post('/register', function(req, res) {
   // 用户有没有cookie
-  const {user, pwd, type} = req.body.data
-  // 查询表中是否有 次用户
+  const {user, pwd, type} = req.body
+  // 查询表中是否有 此用户
   User.findOne({user:user}, function(err, doc) {
     // 假如查到了
     if (doc) {
-      return res.json({errCode: 1, msg: '用户名重复'})
+      return res.json({errCode: 1, errMsg: '用户名重复'})
     }
     User.create({user, pwd, type}, function(e, d) {
       if (e) {
-        return res.json({errCode: 1, msg: '服务器繁忙'})
+        return res.json({errCode: 1, errMsg: '服务器繁忙'})
       }
       return res.json({code: 0})
     })
   })
-  res.json({errCode: 1})
+  // res.json({errCode: 1})
 })
 
 Router.get('/info', function(req, res) {
