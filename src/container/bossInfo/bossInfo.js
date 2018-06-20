@@ -33,8 +33,11 @@ export default class BossInfo extends React.Component {
     console.log(val, 'val')
   }
   render() {
+    const path = this.props.location.pathname
+    const redirectTo = this.props.redirectTo
+    console.log(redirectTo, 'redirectTo')
     return <div>
-    {this.props.redirectTo? <Redirect to={this.props.redirectTo}></Redirect>:null}
+    {redirectTo !== path && redirectTo? <Redirect to={this.props.redirectTo}></Redirect>:null}
       <NavBar mode="dark">boss完善信息</NavBar>
       <AvatarSelector
         selectAvatar={this.selectAvatar}

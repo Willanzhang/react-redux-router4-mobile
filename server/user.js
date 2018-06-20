@@ -18,18 +18,19 @@ Router.get('/list', function(req, res) {
 // 更新信息
 Router.post('/update', function(req, res) {
   // 用户有没有cookie
+  console.log(11111111111)
   const userId = req.cookies.userId
   if (!userId) {
-    return res.json.dumps({errCode: 1})
+    return res.json({errCode: 1, msg: '请重新登录'})
   }
-  const body = req.body
+  const { body } = req
   // 查找并且更新
   User.findByIdAndUpdate(userId,body,function(err, doc) {
     const data = Object.assign({}, {
       user: doc.user,
       type: doc.type
     },body)
-    return { errCode: 0, data: data}
+    return res.json({errCode: 0, data: data})
   })
 
   // // 查询表中是否有 此用户
@@ -72,7 +73,7 @@ Router.post('/register', function(req, res) {
     if (doc) {
       return res.json({errCode: 1, errMsg: '用户名重复'})
     }
-    const userModel = new User({user, pwd:md5Pwd(pwd), type })
+    const userModel = new User({user, pwd:md5Pwd(pwd), type})
     userModel.save((e, d) => {
       if (e) {
         return res.json({errCode: 1, errMsg: '服务器繁忙'})
