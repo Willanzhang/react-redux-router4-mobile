@@ -31,6 +31,7 @@ function asyncComponent(importComponent) {
 // const Auth = asyncComponent(() => import("pages/auth"))
 const Login = asyncComponent(() => import("container/login/login"))
 const Register = asyncComponent(() => import("container/register/register"))
+const BossInfo = asyncComponent(() => import("container/bossInfo/bossInfo"))
 function Boss() {
   return <div>boss</div>
 }
@@ -42,6 +43,7 @@ class Routers extends Component {
         <div>
           <AuthRoute></AuthRoute>
           <Route path='/boss' component={Boss}></Route>
+          <Route path='/bossInfo' component={BossInfo}></Route>
           <Route path='/login' component={Login}></Route>
           <Route path='/register' component={Register}></Route>
         </div>
