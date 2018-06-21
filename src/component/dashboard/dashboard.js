@@ -1,9 +1,10 @@
 import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 import { TabBar, NavBar } from 'antd-mobile'
 import NavLinkBar from 'component/navLink/navLink'
 import { connect } from 'react-redux'
 function Boss () {
-  return <h2>boss</h2>
+  return <h2>boss123</h2>
 }
 function Genius () {
   return <h2>Genius</h2>
@@ -24,6 +25,7 @@ class Dashboard extends React.Component {
     const { pathname } = this.props.location
     console.log(pathname)
     const user = this.props.user
+    const hehe = [1,2,3,4,5]
     const navList = [
       {
         path:'/boss',
@@ -58,6 +60,13 @@ class Dashboard extends React.Component {
     ]
     return <div className="dashboard">
       <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path===pathname).title}</NavBar>
+      <div style={{marginTop: 45}}>
+        <Switch>
+          {navList.map(v => 
+            (<Route key={v.path} path={v.path} component={v.component}></Route>)
+          )}
+        </Switch>
+      </div>
       <NavLinkBar
         data={navList}
       />
