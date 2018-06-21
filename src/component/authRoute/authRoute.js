@@ -2,13 +2,10 @@ import React from 'react'
 import './authRoute.styl'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
-import { register } from 'src/store/actions/user'
+// import { register } from 'src/store/actions/user'
 @withRouter
 
 class AuthRoute extends React.Component{
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     const publicList = ['/login', '/register']
     const pathname = this.props.location.pathname

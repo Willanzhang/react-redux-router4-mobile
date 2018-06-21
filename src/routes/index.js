@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React, { Component } from 'react'
 import AuthRoute from 'component/authRoute/authRoute'
 
@@ -32,20 +32,23 @@ function asyncComponent(importComponent) {
 const Login = asyncComponent(() => import("container/login/login"))
 const Register = asyncComponent(() => import("container/register/register"))
 const BossInfo = asyncComponent(() => import("container/bossInfo/bossInfo"))
-function Boss() {
-  return <div>boss</div>
-}
+const GeniusInfo = asyncComponent(() => import("container/geniusInfo/geniusInfo"))
+const Dashboard = asyncComponent(() => import("component/dashboard/dashboard"))
 
+// boss genius me msg 4个页面
 class Routers extends Component {
   render() {
     const app = (<div>
       <Router>
         <div>
           <AuthRoute></AuthRoute>
-          <Route path='/boss' component={Boss}></Route>
-          <Route path='/bossInfo' component={BossInfo}></Route>
-          <Route path='/login' component={Login}></Route>
-          <Route path='/register' component={Register}></Route>
+          <Switch>
+            <Route path='/bossInfo' component={BossInfo}></Route>
+            <Route path='/geniusInfo' component={GeniusInfo}></Route>
+            <Route path='/login' component={Login}></Route>
+            <Route path='/register' component={Register}></Route>
+            <Route component={Dashboard}></Route>
+          </Switch> 
         </div>
       </Router>
     </div>)

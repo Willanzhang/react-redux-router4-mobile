@@ -12,8 +12,6 @@ import { update } from 'src/store/actions/user'
 export default class BossInfo extends React.Component {
   state = {
     title: '',
-    company: '',
-    money: '',
     desc: '',
     avatar: ''
   }
@@ -26,7 +24,7 @@ export default class BossInfo extends React.Component {
       [key]: val
     })
   }
-  selectAvatar(val) {
+  selectAvatar = (val) => {
     this.setState({
       avatar: val
     })
@@ -38,17 +36,15 @@ export default class BossInfo extends React.Component {
     console.log(redirectTo, 'redirectTo')
     return <div>
     {redirectTo !== path && redirectTo? <Redirect to={this.props.redirectTo}></Redirect>:null}
-      <NavBar mode="dark">boss完善信息</NavBar>
+      <NavBar mode="dark">牛人完善信息也页</NavBar>
       <AvatarSelector
         selectAvatar={this.selectAvatar}
       ></AvatarSelector>  
-      <InputItem onChange={v => this.onChange('title', v)}>招聘职位</InputItem>
-      <InputItem onChange={v => this.onChange('company', v)}>公司名称</InputItem>
-      <InputItem onChange={v => this.onChange('money', v)}>职位薪资</InputItem>
+      <InputItem onChange={v => this.onChange('title', v)}>求职岗位</InputItem>
       <TextareaItem  
         onChange={v => this.onChange('desc', v)}
         autoHeight
-        title="职位要求"
+        title="个人简介"
       ></TextareaItem >
       <WhiteSpace>
       </WhiteSpace>

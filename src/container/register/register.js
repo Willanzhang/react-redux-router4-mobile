@@ -54,11 +54,11 @@ import { register } from 'src/store/actions/user'
             onChange={(v) => this.handleChange('repeatpwd',v)}>确认密码</InputItem>
           <WhiteSpace/>
           <RadioItem 
-            checked={this.state.type == 'genius'}
+            checked={this.state.type === 'genius'}
             onChange={(v) => this.handleChange('type','genius')}
           >牛人</RadioItem>
           <RadioItem 
-            checked={this.state.type == 'boss'}
+            checked={this.state.type === 'boss'}
             onChange={(v) => this.handleChange('type','boss')}
             >BOSS</RadioItem>
           <WhiteSpace/>

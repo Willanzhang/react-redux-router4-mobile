@@ -29,7 +29,6 @@ import { login } from 'src/store/actions/user'
     //  this.props.history.push('./bossInfo')
    }
    render() {
-     const RadioTiem = Radio.RadioItem
      return(
        <div>
          <Logo></Logo >  

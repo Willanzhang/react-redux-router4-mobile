@@ -10,7 +10,9 @@ export function errorMsg(msg) {
   return { msg, type: ERROR_MSG}
 }
 // 授权成功
-export function authSuccess (data) {
+export function authSuccess (obj) {
+  // 去除 pwd 属性
+  const {pwd,...data} = obj
   return {
     type: AUTH_SUCCESS,
     payload: data
@@ -41,17 +43,17 @@ export function login({user, pwd}) {
     return errorMsg('用户名密码必须输入')
   }
   return dispatch => {
-    axios.post('/user/login', {user, pwd}).
-    then(res => {
-      console.log(res.status, '000000000000000');
-      if(res.status === 200 && res.data.errCode === 0){
-        console.log(1111111)
-        dispatch(authSuccess({user, pwd}))
-      } else {
-        console.log(2222222)
-        dispatch(errorMsg(res.data.errMsg))
-      }
-    })
+    axios.post('/user/login', {user, pwd})
+      .then(res => {
+        console.log(res.status, '000000000000000');
+        if(res.status === 200 && res.data.errCode === 0){
+          console.log(1111111)
+          dispatch(authSuccess({user, pwd}))
+        } else {
+          console.log(2222222)
+          dispatch(errorMsg(res.data.errMsg))
+        }
+      })
   }
 }
 

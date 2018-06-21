@@ -27,18 +27,12 @@ class App extends Component {
   state = {
     name: '修复'
   }
-  constructor(props) {
-    super(props)
-    // this.state = {
-    //   age: 190
-    // }
-  }
   componentDidMount() {
   }
   love = (e) => {
   }
   render() {
-    const {num, addGun, addGunAsync, removeGun} = this.props
+    // const {num, addGun, addGunAsync, removeGun} = this.props
     return (
       <div className="App">
       </div>
