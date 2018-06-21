@@ -10,7 +10,6 @@ class NavLink extends React.Component {
   render () {
     const { pathname } = this.props.location
     const navList = this.props.data.filter(v => !v.hide)
-    console.log(navList, 'navList')
     return (
       <TabBar>
         {navList.map(v => (<TabBar.Item
