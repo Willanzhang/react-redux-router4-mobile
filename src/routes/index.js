@@ -1,23 +1,29 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React, { Component } from 'react'
 import AuthRoute from 'component/authRoute/authRoute'
+// import Dashboard from 'component/dashboard/dashboard'
 
 function asyncComponent(importComponent) {
   class AsyncComponent extends Component {
     constructor(props) {
-      super(props);
+      super(props)
 
       this.state = {
         component: null
-      };
+      }
     }
 
     async componentDidMount() {
-      const { default: component } = await importComponent();
+      const { default: component } = await importComponent()
       console.log(1110000000000000)
       this.setState({
         component: component
-      });
+      })
+    }
+    componentWillUnmount() { // 防止 报错Can't call setState (or forceUpdate) on an unmounted component. This is a no-op,
+      this.setState = (state,callback)=>{
+        return
+      }
     }
 
     render() {
@@ -26,7 +32,7 @@ function asyncComponent(importComponent) {
       return C ? <C {...this.props} /> : null;
     }
   }
-  return AsyncComponent;
+  return AsyncComponent
 }
 // const Auth = asyncComponent(() => import("pages/auth"))
 const Login = asyncComponent(() => import("container/login/login"))
