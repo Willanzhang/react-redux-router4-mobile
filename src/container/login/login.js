@@ -32,13 +32,14 @@ import { login } from 'src/store/actions/user'
      return(
        <div>
          <Logo></Logo >  
-         <h2> 登录页</h2>
          <WingBlank>
           <List>
+            <WhiteSpace/>
             <InputItem onChange={(v)=>this.handleChange('user',v)}>用户名</InputItem>
             <WhiteSpace/>
             <InputItem onChange={(v)=>this.handleChange('pwd',v)} type="password">密码</InputItem>
           </List>
+          <WhiteSpace/>
           <Button type="primary" onClick={this.login}>登录</Button>
           <WhiteSpace/>
           <Button type="primary" onClick={this.register}>注册</Button>
