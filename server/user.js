@@ -12,7 +12,7 @@ Router.get('/list', function (req, res) {
   const { type, pageSize, page } = req.query
   // 分页 简单模式
   // Paging(User.find({type}), page, pageSize,res)
-  common.Paging1(User.find({ type }), page || 1, pageSize || 3, res)
+  common.Paging1(User.find({ type }), page || 1, pageSize || 10, res)
   // User.find({'_id' :{ "$gt" :ObjectId("55940ae59c39572851075bfd")} }).explain() // 不知道啥子
 
   // 筛选
