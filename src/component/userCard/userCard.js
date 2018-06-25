@@ -11,7 +11,7 @@ class UserCard extends React.Component {
     super(props)
     this.state = {
       refreshing: false,
-      down: true,
+      down: false,
       height: document.documentElement.clientHeight
     }
   }
