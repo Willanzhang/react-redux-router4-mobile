@@ -3,21 +3,20 @@ import { connect } from 'react-redux'
 import { getUserList } from 'src/store/actions/chat'
 import { Card, WhiteSpace, WingBlank } from 'antd-mobile'
 import UserCard from 'component/userCard/userCard'
-import './boss.styl'
+import './genius.styl'
 import axios from 'axios'
 @connect(state=> state.chatUser, {getUserList})
-class Boss extends React.Component{
+class Genius extends React.Component{
   componentDidMount () {
-    this.props.getUserList('genius')
+    this.props.getUserList('boss')
   }
   render() {
-    console.log(this.props.userList, 'userList')
     const {Header, Body} = Card
-    return <div className="boss">
+    return <div className="genius">
       <UserCard
         userList={this.props.userList}
-      /> 
+      />
     </div>
   }
 }
-export default Boss
+export default Genius

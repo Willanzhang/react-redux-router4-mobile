@@ -3,11 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import { TabBar, NavBar } from 'antd-mobile'
 import NavLinkBar from 'component/navLink/navLink'
 import Boss from 'component/boss/boss'
+import Genius from 'component/genius/genius'
 import { connect } from 'react-redux'
 
-function Genius () {
-  return <h2>Genius</h2>
-}
 function Msg () {
   return <h2>msg</h2>
 }
@@ -58,7 +56,7 @@ class Dashboard extends React.Component {
       }
     ]
     return <div className="dashboard">
-      <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path===pathname).title}</NavBar>
+      <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path===pathname) && navList.find(v => v.path===pathname).title }</NavBar>
       <div style={{marginTop: 45}}>
         <Switch>
           {navList.map(v => 

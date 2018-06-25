@@ -14,3 +14,9 @@ body {
 	top: 0;
 	width: 100%;
 }
+.fixd-header {
+	z-index: 1000;
+}
+.am-pull-to-refresh-content-wrapper {
+	padding-bottom: 70px !important;
+}
