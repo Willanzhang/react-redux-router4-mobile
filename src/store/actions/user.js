@@ -48,7 +48,8 @@ export function login({user, pwd}) {
         console.log(res.status, '000000000000000');
         if(res.status === 200 && res.data.errCode === 0){
           console.log(1111111)
-          dispatch(authSuccess({user, pwd}))
+
+          dispatch(authSuccess(res.data.data))
         } else {
           console.log(2222222)
           dispatch(errorMsg(res.data.errMsg))

@@ -4,6 +4,7 @@ import { List, InputItem, WingBlank, WhiteSpace, Button, Radio} from 'antd-mobil
 import Logo from 'component/logo/logo'
 import { connect } from 'react-redux'
 import { login } from 'src/store/actions/user'
+import { Redirect } from 'react-router-dom'
 @connect(
   state => state.user,
   {login}
@@ -30,9 +31,11 @@ import { login } from 'src/store/actions/user'
    }
    render() {
      return(
-       <div>
-         <Logo></Logo >  
-         <WingBlank>
+        <WingBlank>
+        {this.props.redirectTo.length && this.props.redirectTo !== '/login' ?
+        <Redirect to={this.props.redirectTo} /> :
+					null}
+         <Logo></Logo >
           <List>
             <WhiteSpace/>
             <InputItem onChange={(v)=>this.handleChange('user',v)}>用户名</InputItem>
@@ -43,8 +46,7 @@ import { login } from 'src/store/actions/user'
           <Button type="primary" onClick={this.login}>登录</Button>
           <WhiteSpace/>
           <Button type="primary" onClick={this.register}>注册</Button>
-         </WingBlank>
-       </div>
+        </WingBlank>
      )
    }
  }
