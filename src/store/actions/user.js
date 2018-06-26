@@ -5,6 +5,7 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const LOAD_DATA = 'LOAD_DATA'
 export const ERROR_MSG = 'ERROR_MSG'
 export const UPDATE = 'UPDATE'
+export const LOGOUT = 'LOGOUT'
 
 export function errorMsg(msg) {
   return { msg, type: ERROR_MSG}
@@ -57,7 +58,12 @@ export function login({user, pwd}) {
       })
   }
 }
-
+// 退出登录
+export function logout () {
+  return {
+    type: LOGOUT
+  }
+}
 // 获取用户信息
 export function userInfo(callback) {
   return dispatch => {

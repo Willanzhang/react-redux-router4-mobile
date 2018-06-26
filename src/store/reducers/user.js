@@ -1,4 +1,4 @@
-import {AUTH_SUCCESS, ERROR_MSG, LOAD_DATA} from '../actions/user'
+import {AUTH_SUCCESS, ERROR_MSG, LOAD_DATA, LOGOUT} from '../actions/user'
 import {getRedirectPath} from 'common/utils'
 const initState = {
   redirectTo: '',
@@ -10,6 +10,8 @@ const initState = {
 function user (state=initState, action) {
   switch(action.type) {
     case AUTH_SUCCESS:
+      return {...state, msg:'',redirectTo:getRedirectPath(action.payload), ...action.payload}
+    case LOGOUT:
       return {...state, msg:'',redirectTo:getRedirectPath(action.payload), ...action.payload}
     case LOAD_DATA:
       return {...state, ...action.payload}
