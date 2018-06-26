@@ -12,7 +12,7 @@ function user (state=initState, action) {
     case AUTH_SUCCESS:
       return {...state, msg:'',redirectTo:getRedirectPath(action.payload), ...action.payload}
     case LOGOUT:
-      return {...state, msg:'',redirectTo:getRedirectPath(action.payload), ...action.payload}
+      return {...initState,redirectTo:'/login'}
     case LOAD_DATA:
       return {...state, ...action.payload}
     case ERROR_MSG:
