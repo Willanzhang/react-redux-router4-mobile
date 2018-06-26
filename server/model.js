@@ -27,6 +27,7 @@ const models = {
 }
 // 批量生成
 for( let m in models) {
+  // 创建了user 和chat 两个表
   mongoose.model(m, new mongoose.Schema(models[m]))
 }
 

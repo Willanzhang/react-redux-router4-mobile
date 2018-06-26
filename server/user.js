@@ -4,7 +4,7 @@ const Router = express.Router()
 const utils = require('utility')
 const models = require('./model')
 const common = require('./common')
-const User = models.getModel('user')
+const User = models.getModel('user') // 获取表
 const _filter = { 'pwd': 0, '__v': 0 }
 // User.remove({},function(e,d) {
 // })
@@ -63,7 +63,7 @@ Router.post('/login', (req, res) => {
   const { user, pwd } = req.body
   User.findOne({ user, pwd: md5Pwd(pwd) }, _filter, (err, doc) => {
     if (!doc) {
-      return res.json({ code: 1, msg: '用户名或密码错误' })
+      return res.json({ code: 1, errMsg: '用户名或密码错误' })
     } else {
       res.cookie('userId', doc._id)
       return res.json({ errCode: 0, data: doc })

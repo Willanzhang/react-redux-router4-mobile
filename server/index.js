@@ -4,9 +4,9 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const app =express()
 
-app.use(cookieParser())
-app.use(bodyParser.json())
-app.use('/user', userRouter)
+app.use(cookieParser()) // 操作cookie
+app.use(bodyParser.json()) // 处理post请求
+app.use('/user', userRouter) // 路由
 // app.get('/',function (req, res) {
 //     res.send('<h1>hello word</h1>')
 // })
