@@ -9,6 +9,7 @@ import axios from 'axios'
 class Boss extends React.Component{
   componentDidMount () {
     this.props.getUserList('genius')
+    // console.log(queryString.parse(this.props.location.search), 'location')
   }
   render() {
     console.log(this.props.userList, 'userList')

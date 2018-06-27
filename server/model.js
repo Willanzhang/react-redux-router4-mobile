@@ -23,6 +23,12 @@ const models = {
     'money': {'type': String}
   },
   chat: {
+    'chatid':{type: String, require: true}, // 聊天id
+    'from': {type: String, require: true}, // 发送人
+    'to': {type: String, require: true}, // 接受人
+    'read': {type: Boolean, default: false}, // 是否已读
+    'content': {type: String, require: true, default: ''}, // 聊天内容
+    'create_time': {type: Number, require: true, default: new Date().getTime()},
   }
 }
 // 批量生成

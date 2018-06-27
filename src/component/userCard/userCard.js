@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { Card, WhiteSpace, WingBlank, PullToRefresh } from 'antd-mobile'
+import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'
-
+@withRouter
 class UserCard extends React.Component {
   static propTypes = {
     userList: PropTypes.array.isRequired
@@ -14,6 +15,9 @@ class UserCard extends React.Component {
       down: false,
       height: document.documentElement.clientHeight
     }
+  }
+  handleClick(v) {
+    this.props.history.push(`/chat/${v.user}`)
   }
   componentDidMount() {
     const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
@@ -44,7 +48,9 @@ class UserCard extends React.Component {
         <WhiteSpace></WhiteSpace>
         {this.props.userList.map(v =>
           v.avatar ?
-            (<Card key={v._id}>
+            (<Card 
+              onClick={() => this.handleClick(v)}
+              key={v._id}>
               <Header
                 title={v.user}
                 thumb={require(`./imgs/${v.avatar}.png`)}

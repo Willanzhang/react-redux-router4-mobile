@@ -40,6 +40,7 @@ const Register = asyncComponent(() => import("container/register/register"))
 const BossInfo = asyncComponent(() => import("container/bossInfo/bossInfo"))
 const GeniusInfo = asyncComponent(() => import("container/geniusInfo/geniusInfo"))
 const Dashboard = asyncComponent(() => import("component/dashboard/dashboard"))
+const Chat = asyncComponent(() => import("component/chat/chat"))
 
 // boss genius me msg 4个页面
 class Routers extends Component {
@@ -53,6 +54,7 @@ class Routers extends Component {
             <Route path='/geniusInfo' component={GeniusInfo}></Route>
             <Route path='/login' component={Login}></Route>
             <Route path='/register' component={Register}></Route>
+            <Route path='/chat/:user' component={Chat}></Route>
             <Route component={Dashboard}></Route>
           </Switch> 
         </div>
