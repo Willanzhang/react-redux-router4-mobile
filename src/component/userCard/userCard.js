@@ -17,7 +17,7 @@ class UserCard extends React.Component {
     }
   }
   handleClick(v) {
-    this.props.history.push(`/chat/${v.user}`)
+    this.props.history.push(`/chat/${v._id}`)
   }
   componentDidMount() {
     const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;

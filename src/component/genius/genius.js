@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getUserList } from 'src/store/actions/chat'
+import { getUserList } from 'src/store/actions/chatUser'
 import { Card, WhiteSpace, WingBlank } from 'antd-mobile'
 import UserCard from 'component/userCard/userCard'
 import './genius.styl'

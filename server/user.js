@@ -4,10 +4,12 @@ const Router = express.Router()
 const utils = require('utility')
 const models = require('./model')
 const common = require('./common')
-const User = models.getModel('user') // 获取表
+const User = models.getModel('user') // 获取表user
+const Chat = models.getModel('chat') // 获取表chat
 const _filter = { 'pwd': 0, '__v': 0 }
 // User.remove({},function(e,d) {
 // })
+// 获取用户列表 genius boss
 Router.get('/list', function (req, res) {
   const { type, pageSize, page } = req.query
   // 分页 简单模式
@@ -24,6 +26,16 @@ Router.get('/list', function (req, res) {
   // })
 })
 
+// 获取聊天信息
+Router.get('/getmsglist', function(req, res) {
+  const user = req.cookies.user
+  // $or 多个查询条件  用的userId比较靠谱
+  // Chat.find({'$or':[{from: user, to: user}]}, function (err, doc) {
+  // })
+  Chat.find({}, function (err, doc) {
+    return res.json({errCode: 0,data: doc})
+  })
+})
 // 更新信息
 Router.post('/update', function (req, res) {
   // 用户有没有cookie
@@ -70,7 +82,6 @@ Router.post('/login', (req, res) => {
     }
   })
 })
-
 
 // 注册
 Router.post('/register', function (req, res) {

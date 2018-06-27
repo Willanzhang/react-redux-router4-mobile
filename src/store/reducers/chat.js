@@ -1,15 +1,19 @@
-import {USER_LIST} from '../actions/chat'
-import {getRedirectPath} from 'common/utils'
+import {MSG_LIST, MSG_RECV, MSG_READ} from '../actions/chat'
 const initState = {
-  userList: []
+  chatmsg: [],
+  unread: 0
 }
 
-function chatuser (state=initState, action) {
+function chat (state=initState, action) {
   switch(action.type) {
-    case USER_LIST:
-      return {...state, userList:action.payload}
+    case MSG_LIST:
+      return {...state, chatmsg:action.payload, unread: action.payload.filter(v => !v.read).length}
+    case MSG_RECV:
+      return {...state, chatmsg:[...state.chatmsg,action.payload],unread:state.unread + 1}
+    // case MSG_READ:
+    //   return {...state, userList:action.payload}
     default:
       return state
   }
 }
-export default chatuser
+export default chat
