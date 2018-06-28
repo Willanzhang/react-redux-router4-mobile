@@ -33,6 +33,7 @@ class Chat extends React.Component {
     // })
   }
   render() {
+    const Item = List.Item
     const user = this.props.user.user
     const _id = this.props.match.params.user
     return <div>
@@ -41,9 +42,17 @@ class Chat extends React.Component {
     </NavBar>
       {this.props.chat.chatmsg.map((v, i) => {
         return v.from === _id?(
-          <p key={i._id}>对方发来的：{v.content}</p>
+          <List key={v._id}>
+            <Item
+            >{v.content}</Item>
+          </List>
         ):(
-          <p key={i._id}>我发的：{v.content}</p>
+          <List key={v._id}>
+            <Item 
+              extra={'avatar'}
+              className="chat-me"
+            >{v.content}</Item>
+          </List>
         )
       })}
       <div className="stick-footer">

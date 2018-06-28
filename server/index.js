@@ -15,7 +15,9 @@ io.on('connection', function (socket) {
 		const { from, to, msg } = data
 		const chatid = [from, to].sort().join('_')
 		Chat.create({ chatid, from, to, content: msg}, function (err, doc) {
-			io.emit('recvmsg', Object.assign({},doc._doc))
+			if (!err) {
+				io.emit('recvmsg', Object.assign({},doc._doc))
+			}
 		})
 		console.log(data, 1111)
 		// 接受到事件后 发送全局事件
