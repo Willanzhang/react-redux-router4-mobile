@@ -9,27 +9,29 @@ import { getMsgList, recvMsg } from 'src/store/actions/chat'
 import User from 'component/user/user'
 import { connect } from 'react-redux'
 
-function Msg () {
+function Msg() {
   return <h2>msg</h2>
 }
 
-@connect(state => state,{ getMsgList, recvMsg })
+@connect(state => state, { getMsgList, recvMsg })
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
   }
   componentDidMount() {
-    this.props.getMsgList()
-    this.props.recvMsg()
+    if (!this.props.chat.chatmsg.length) {
+      this.props.getMsgList()
+      this.props.recvMsg()
+    }
   }
-  render () {
+  render() {
     const { pathname } = this.props.location
     console.log(pathname)
     const user = this.props.user
-    const hehe = [1,2,3,4,5]
+    const hehe = [1, 2, 3, 4, 5]
     const navList = [
       {
-        path:'/boss',
+        path: '/boss',
         text: '牛人',
         icon: 'boss',
         title: '牛人列表',
@@ -37,7 +39,7 @@ class Dashboard extends React.Component {
         hide: user.type === 'genius'
       },
       {
-        path:'/genius',
+        path: '/genius',
         text: 'boss',
         icon: 'job',
         title: 'BOSS列表',
@@ -45,14 +47,14 @@ class Dashboard extends React.Component {
         hide: user.type === 'boss'
       },
       {
-        path:'/msg',
+        path: '/msg',
         text: '消息',
         icon: 'msg',
         title: '消息列表',
         component: Msg
       },
       {
-        path:'/me',
+        path: '/me',
         text: '我',
         icon: 'user',
         title: '个人中心',
@@ -60,17 +62,17 @@ class Dashboard extends React.Component {
       }
     ]
     return <div className="dashboard">
-      <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path===pathname) && navList.find(v => v.path===pathname).title }</NavBar>
-      <div style={{marginTop: 45}}>
+      <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path === pathname) && navList.find(v => v.path === pathname).title}</NavBar>
+      <div style={{ marginTop: 45 }}>
         <Switch>
-          {navList.map(v => 
+          {navList.map(v =>
             (<Route key={v.path} path={v.path} component={v.component}></Route>)
           )}
         </Switch>
       </div>
       <NavLinkBar
         data={navList}
-      />
+        />
     </div>
   }
 }
