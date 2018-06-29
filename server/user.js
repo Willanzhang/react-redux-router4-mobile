@@ -27,14 +27,25 @@ Router.get('/list', function (req, res) {
 })
 
 // 获取聊天信息
-Router.get('/getmsglist', function(req, res) {
-  const user = req.cookies.user
-  // $or 多个查询条件  用的userId比较靠谱
-  // Chat.find({'$or':[{from: user, to: user}]}, function (err, doc) {
-  // })
-  Chat.find({}, function (err, doc) {
-    return res.json({errCode: 0,data: doc})
+Router.get('/getmsglist', function (req, res) {
+  const user = req.cookies.userId
+  User.find({}, function (e, userdoc) {
+    if (!e) {
+      let users = {}
+      userdoc.forEach(v => {
+        users[v._id] = { name: v.user, avatar: v.avatar }
+      })
+      console.log(user, 'user66666')
+      // $or 多个查询条件  用的userId比较靠谱
+      Chat.find({ '$or': [{ from: user }, { to: user }] }, function (err, doc) {
+        return res.json({ errCode: 0, data: doc, users: users })
+      })
+    } else {
+      console.log(e);
+    }
   })
+  // Chat.find({}, function (err, doc) {
+  // })
 })
 // 更新信息
 Router.post('/update', function (req, res) {

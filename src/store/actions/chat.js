@@ -12,8 +12,8 @@ export const MSG_RECV = 'MSG_RECV'
 export const MSG_READ = 'MSG_READ'
 
 
-export function msgList(msgs) {
-  return { type: MSG_LIST, payload: msgs }
+export function msgList(msgs, users) {
+  return { type: MSG_LIST, payload: {msgs, users} }
 }
 
 export function msgRecv(msg) {
@@ -25,7 +25,7 @@ export function getMsgList() {
     axios.get(`/user/getmsglist`)
       .then(res => {
         if (res.status === 200 && res.data.errCode === 0) {
-          dispatch(msgList(res.data.data))
+          dispatch(msgList(res.data.data, res.data.users))
         }
       })
   }
