@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputItem, List, NavBar, Icon } from 'antd-mobile'
+import { InputItem, List, NavBar, Icon, Grid } from 'antd-mobile'
 import { getQuery, getChatId } from 'common/utils.js'
 import { connect } from 'react-redux'
 import { getMsgList, sendMsg, recvMsg } from 'src/store/actions/chat'
@@ -27,7 +27,10 @@ class Chat extends React.Component {
       this.props.getMsgList()
       this.props.recvMsg()
     }
-
+    // 处理grid bug： 需点击才扩展开
+    setTimeout(function() {
+      window.dispatchEvent(new Event('resize'))
+    }, 0);
     // getQuery('name')
     // socket.on('recvmsg', (data)=>{
     //   this.setState({
@@ -36,6 +39,10 @@ class Chat extends React.Component {
     // })
   }
   render() {
+    const emoji = '😀 😃 😄 😁 😆 😅 😂 😊 😇 🙂 🙃 😉 😌 😍 😘 😗 😙 😚 😋 😜 😝 😛 🤑 🤗 🤓 😎 😏 😒 😞 😔 😟 😕 🙁 😣 😖 😫 😩 😤 😠 😡 😶 😐 😑 😯 😦 😧 😮 😲 😵 😳 😱 😨 😰 😢 😥 😭 😓 😪 😴 🙄 🤔 😬 🤐 😷 🤒 🤕 😈 👿 👹 👺 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾 👐 🙌 👏 🙏 👍 👎 👊 ✊ 🤘 👌 👈 👉 👆 👇 ✋  🖐 🖖 👋  💪 🖕 ✍️  💅 🖖 💄 💋 👄 👅 👂 👃 👁 👀 '
+      .split(' ')
+      .filter(v => v)
+      .map(v =>( {text: v}))
     const Item = List.Item
     const user = this.props.user.user
     const userid= this.props.match.params.user
@@ -81,6 +88,12 @@ class Chat extends React.Component {
             extra={<span onClick={() => this.handleSubmit()}>发送</span>}
             >信息
         </InputItem>
+        <Grid
+          data={emoji}
+          columnNum={8}
+          carouselMaxRow={3}
+          isCarousel={true}
+        />
         </List>
       </div>
     </div>

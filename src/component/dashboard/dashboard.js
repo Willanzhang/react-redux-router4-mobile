@@ -4,14 +4,11 @@ import { TabBar, NavBar } from 'antd-mobile'
 import NavLinkBar from 'component/navLink/navLink'
 import Boss from 'component/boss/boss'
 import Genius from 'component/genius/genius'
+import Msg from 'component/message/message'
 import { getMsgList, recvMsg } from 'src/store/actions/chat'
 
 import User from 'component/user/user'
 import { connect } from 'react-redux'
-
-function Msg() {
-  return <h2>msg</h2>
-}
 
 @connect(state => state, { getMsgList, recvMsg })
 class Dashboard extends React.Component {
