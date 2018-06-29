@@ -7,8 +7,8 @@ const Chat = models.getModel('chat') // 获取表chat
 const app = express()
 // work with express
 const server = require('http').Server(app)
-// Chat.remove({},function(err, doc){
-// })
+Chat.remove({},function(err, doc){
+})
 const io = require('socket.io')(server)
 io.on('connection', function (socket) {
 	socket.on('sendmsg', function (data) {

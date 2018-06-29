@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputItem, List, NavBar } from 'antd-mobile'
+import { InputItem, List, NavBar, Icon } from 'antd-mobile'
 import { getQuery } from 'common/utils.js'
 import { connect } from 'react-redux'
 import { getMsgList, sendMsg, recvMsg } from 'src/store/actions/chat'
@@ -7,7 +7,7 @@ import './chat.styl'
 import io from 'socket.io-client'
 // 由于当前是跨域  前端端口是3000 后端是9093 需要手动连接  否则 可以直接 io()
 const socket = io('ws://localhost:9093')
-@connect(state => state,{getMsgList, sendMsg, recvMsg})
+@connect(state => state, { getMsgList, sendMsg, recvMsg })
 class Chat extends React.Component {
   constructor(props) {
     super(props)
@@ -18,13 +18,16 @@ class Chat extends React.Component {
     const from = this.props.user._id
     const to = this.props.match.params.user
     const msg = this.state.text
-    console.log({from, to, msg}, '999*');
-    this.props.sendMsg({from, to, msg})
+    console.log({ from, to, msg }, '999*');
+    this.props.sendMsg({ from, to, msg })
     this.setState({ text: '' })
   }
   componentDidMount() {
-    this.props.getMsgList()
-    this.props.recvMsg()
+    if (!this.props.chat.chatmsg.length) {
+      this.props.getMsgList()
+      this.props.recvMsg()
+    }
+
     // getQuery('name')
     // socket.on('recvmsg', (data)=>{
     //   this.setState({
@@ -35,25 +38,37 @@ class Chat extends React.Component {
   render() {
     const Item = List.Item
     const user = this.props.user.user
-    const _id = this.props.match.params.user
+    const userid= this.props.match.params.user
+    const users = this.props.chat.users
+    if(!users[userid]) {
+      return null
+    }
     return <div>
-    <NavBar node="dark">
-      { _id }
-    </NavBar>
+      <NavBar 
+        node="dark"
+        icon={<Icon type='left'></Icon>}
+        onLeftClick={()=> {
+          this.props.history.goBack()
+        }}
+      >
+        {users[userid].name}
+      </NavBar>
       {this.props.chat.chatmsg.map((v, i) => {
-        return v.from === _id?(
+        const avatar = require(`./imgs/${users[v.from].avatar}.png`)
+        return v.from === userid ? (
           <List key={v._id}>
             <Item
-            >{v.content}</Item>
+            thumb={avatar}
+              >{v.content}</Item>
           </List>
-        ):(
-          <List key={v._id}>
-            <Item 
-              extra={'avatar'}
-              className="chat-me"
-            >{v.content}</Item>
-          </List>
-        )
+        ) : (
+            <List key={v._id}>
+              <Item
+                extra={<img src={avatar}/>}
+                className="chat-me"
+                >{v.content}</Item>
+            </List>
+          )
       })}
       <div className="stick-footer">
         <List>
