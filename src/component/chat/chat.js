@@ -11,7 +11,12 @@ const socket = io('ws://localhost:9093')
 class Chat extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { text: '', msg: [] }
+    this.state = {
+      text: '',
+      msg: [],
+      showEmoji: false
+    }
+    this.girdFix = this.girdFix.bind(this)
   }
   handleSubmit() {
     // socket.emit('sendmsg', { text: this.state.text})
@@ -27,10 +32,7 @@ class Chat extends React.Component {
       this.props.getMsgList()
       this.props.recvMsg()
     }
-    // 处理grid bug： 需点击才扩展开
-    setTimeout(function() {
-      window.dispatchEvent(new Event('resize'))
-    }, 0);
+
     // getQuery('name')
     // socket.on('recvmsg', (data)=>{
     //   this.setState({
@@ -38,28 +40,34 @@ class Chat extends React.Component {
     //   })
     // })
   }
+  girdFix() {
+    // 处理grid bug： 需点击才扩展开
+    setTimeout(function () {
+      window.dispatchEvent(new Event('resize'))
+    }, 0);
+  }
   render() {
     const emoji = '😀 😃 😄 😁 😆 😅 😂 😊 😇 🙂 🙃 😉 😌 😍 😘 😗 😙 😚 😋 😜 😝 😛 🤑 🤗 🤓 😎 😏 😒 😞 😔 😟 😕 🙁 😣 😖 😫 😩 😤 😠 😡 😶 😐 😑 😯 😦 😧 😮 😲 😵 😳 😱 😨 😰 😢 😥 😭 😓 😪 😴 🙄 🤔 😬 🤐 😷 🤒 🤕 😈 👿 👹 👺 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾 👐 🙌 👏 🙏 👍 👎 👊 ✊ 🤘 👌 👈 👉 👆 👇 ✋  🖐 🖖 👋  💪 🖕 ✍️  💅 🖖 💄 💋 👄 👅 👂 👃 👁 👀 '
       .split(' ')
       .filter(v => v)
-      .map(v =>( {text: v}))
+      .map(v => ({ text: v }))
     const Item = List.Item
     const user = this.props.user.user
-    const userid= this.props.match.params.user
+    const userid = this.props.match.params.user
     const users = this.props.chat.users
-    if(!users[userid]) {
+    if (!users[userid]) {
       return null
     }
     const chatid = getChatId(userid, this.props.user._id)
     const chatmsgs = this.props.chat.chatmsg.filter(v => v.chatid === chatid)
     return <div>
-      <NavBar 
+      <NavBar
         node="dark"
         icon={<Icon type='left'></Icon>}
-        onLeftClick={()=> {
+        onLeftClick={() => {
           this.props.history.goBack()
-        }}
-      >
+        } }
+        >
         {users[userid].name}
       </NavBar>
       {chatmsgs.map((v, i) => {
@@ -67,13 +75,14 @@ class Chat extends React.Component {
         return v.from === userid ? (
           <List key={v._id}>
             <Item
-            thumb={avatar}
+              thumb={avatar}
               >{v.content}</Item>
           </List>
         ) : (
             <List key={v._id}>
               <Item
-                extra={<img src={avatar}/>}
+                id="chat-me"
+                extra={<img src={avatar} />}
                 className="chat-me"
                 >{v.content}</Item>
             </List>
@@ -85,15 +94,33 @@ class Chat extends React.Component {
             placeholder='请输入'
             value={this.state.text}
             onChange={v => this.setState({ text: v })}
-            extra={<span onClick={() => this.handleSubmit()}>发送</span>}
+            extra={
+              <div>
+                <span style={{ marginRight: '.15rem' }} onClick={() => { 
+                  this.setState({ showEmoji: !this.state.showEmoji })
+                  this.girdFix()
+                }}>😀</span>
+                <span onClick={() => this.handleSubmit()}>发送</span>
+              </div>
+            }
             >信息
         </InputItem>
-        <Grid
-          data={emoji}
-          columnNum={8}
-          carouselMaxRow={3}
-          isCarousel={true}
-        />
+          {this.state.showEmoji ?
+            <Grid
+              data={emoji}
+              columnNum={8}
+              carouselMaxRow={3}
+              isCarousel={true}
+              onClick={el => {
+                this.setState({
+                  text: this.state.text + el.text
+                })
+                console.log(el)
+              }}
+              /> :
+            null
+          }
+
         </List>
       </div>
     </div>
