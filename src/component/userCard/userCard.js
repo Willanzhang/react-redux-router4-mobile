@@ -20,14 +20,16 @@ class UserCard extends React.Component {
     this.props.history.push(`/chat/${v._id}`)
   }
   componentDidMount() {
-    const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-    setTimeout(() => this.setState({
-      height: hei
-    }), 0);
+    if (this.props.userList.length > 0) {
+      const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
+      setTimeout(() => this.setState({
+        height: hei
+      }), 0);
+    }
   }
   render() {
-    const {Header, Body} = Card
-    return <PullToRefresh
+    const { Header, Body } = Card
+    return <div>{this.props.userList.length > 0 ? (<PullToRefresh
       damping={60}
       ref={el => this.ptr = el}
       style={{
@@ -42,20 +44,20 @@ class UserCard extends React.Component {
         setTimeout(() => {
           this.setState({ refreshing: false });
         }, 1000);
-      } }
-      >
+      }}
+    >
       <WingBlank>
         <WhiteSpace></WhiteSpace>
         {this.props.userList.map(v =>
           v.avatar ?
-            (<Card 
+            (<Card
               onClick={() => this.handleClick(v)}
               key={v._id}>
               <Header
                 title={v.user}
                 thumb={require(`./imgs/${v.avatar}.png`)}
                 extra={<span>{v.title}</span>}
-                ></Header>
+              ></Header>
               <Body>
                 {v.desc.split('\n').map(d =>
                   <div key={d}>{d}</div>
@@ -66,7 +68,8 @@ class UserCard extends React.Component {
             </Card>) : null
         )}
       </WingBlank>
-    </PullToRefresh>
+    </PullToRefresh>) : null
+  }</div>
   }
 }
 export default UserCard
