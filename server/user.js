@@ -1,3 +1,5 @@
+// import { CLIENT_RENEG_LIMIT } from 'tls';
+
 const express = require('express')
 const Router = express.Router()
 // md5
@@ -9,6 +11,11 @@ const Chat = models.getModel('chat') // 获取表chat
 const _filter = { 'pwd': 0, '__v': 0 }
 // User.remove({},function(e,d) {
 // })
+User.find({},function(e,d) {
+  if(!e) {
+    console.log(d, 'dddd')
+  }
+})
 // 获取用户列表 genius boss
 Router.get('/list', function (req, res) {
   const { type, pageSize, page } = req.query
@@ -110,6 +117,7 @@ Router.post('/register', function (req, res) {
         return res.json({ errCode: 1, errMsg: '服务器繁忙' })
       } else {
         const { user, type, _id} = d
+        console.log(d, '999999999')
         res.cookie('userId', _id)
         return res.json({ errCode: 0, data: { user, type, _id } })
       }

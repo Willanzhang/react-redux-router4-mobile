@@ -33,7 +33,17 @@ function Paging1(find, page, pageSize, res) {
       totalPage = Math.ceil(count/pageSize)
       find.limit(limit).exec('find',function (err, doc) {
         if (!err) {
-          last_id = doc[doc.length - 1]._id
+          // 处理数量为0时
+          try {
+            last_id = doc[doc.length - 1]._id
+          } 
+          catch (err) {
+            return res.json({errCode:0,data:[],page: {
+              currentPage: page,
+              pageSize,
+              totalPage
+            }})
+          }
           if (page == 1) {
             return res.json({
               data: doc, errCode: 0, page: {
