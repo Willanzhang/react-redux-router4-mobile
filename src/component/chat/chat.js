@@ -2,12 +2,12 @@ import React from 'react'
 import { InputItem, List, NavBar, Icon, Grid } from 'antd-mobile'
 import { getQuery, getChatId } from 'common/utils.js'
 import { connect } from 'react-redux'
-import { getMsgList, sendMsg, recvMsg } from 'src/store/actions/chat'
+import { getMsgList, sendMsg, recvMsg, readMsg } from 'src/store/actions/chat'
 import './chat.styl'
 import io from 'socket.io-client'
 // 由于当前是跨域  前端端口是3000 后端是9093 需要手动连接  否则 可以直接 io()
 const socket = io('ws://localhost:9093')
-@connect(state => state, { getMsgList, sendMsg, recvMsg })
+@connect(state => state, { getMsgList, sendMsg, recvMsg, readMsg })
 class Chat extends React.Component {
   constructor(props) {
     super(props)
@@ -32,7 +32,8 @@ class Chat extends React.Component {
       this.props.getMsgList()
       this.props.recvMsg()
     }
-
+    const to = this.props.match.params.user
+    this.props.readMsg(to)
     // getQuery('name')
     // socket.on('recvmsg', (data)=>{
     //   this.setState({

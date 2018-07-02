@@ -11,11 +11,6 @@ const Chat = models.getModel('chat') // 获取表chat
 const _filter = { 'pwd': 0, '__v': 0 }
 // User.remove({},function(e,d) {
 // })
-User.find({},function(e,d) {
-  if(!e) {
-    console.log(d, 'dddd')
-  }
-})
 // 获取用户列表 genius boss
 Router.get('/list', function (req, res) {
   const { type, pageSize, page } = req.query
@@ -42,7 +37,6 @@ Router.get('/getmsglist', function (req, res) {
       userdoc.forEach(v => {
         users[v._id] = { name: v.user, avatar: v.avatar }
       })
-      console.log(user, 'user66666')
       // $or 多个查询条件  用的userId比较靠谱
       Chat.find({ '$or': [{ from: user }, { to: user }] }, function (err, doc) {
         return res.json({ errCode: 0, data: doc, users: users })
@@ -54,10 +48,23 @@ Router.get('/getmsglist', function (req, res) {
   // Chat.find({}, function (err, doc) {
   // })
 })
+// 提交已读
+Router.post('/readmsg', function (req, res) {
+  // 用户有没有cookie
+  const userId = req.cookies.userId
+  const { from } = req.body
+  // 更新信息已读信息    参数 {筛选，设置，是否多行生效,回调}
+  Chat.update({from, to: userId},{'$set': {read:true}},{'multi':true}, function(e,d){
+    console.log(d,'修改结果') //{ n: 1, nModified: 1, ok: 1 }  n 总数据量  nModified 修改数量  1 修改成功
+    if(!e) {
+      return res.json({errCode: 0, num: d.nModified})
+    }
+    return res.json({errCode: 0,msg:'阅读失败'})
+  })
+})
 // 更新信息
 Router.post('/update', function (req, res) {
   // 用户有没有cookie
-  console.log(11111111111)
   const userId = req.cookies.userId
   if (!userId) {
     return res.json({ errCode: 1, msg: '请重新登录' })
@@ -117,7 +124,6 @@ Router.post('/register', function (req, res) {
         return res.json({ errCode: 1, errMsg: '服务器繁忙' })
       } else {
         const { user, type, _id} = d
-        console.log(d, '999999999')
         res.cookie('userId', _id)
         return res.json({ errCode: 0, data: { user, type, _id } })
       }

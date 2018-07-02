@@ -8,9 +8,13 @@ export const MSG_LIST = 'MSG_LIST'
 // 读取信息
 export const MSG_RECV = 'MSG_RECV'
 
-// 标识已读
+// 标识信息已读
 export const MSG_READ = 'MSG_READ'
 
+
+export function msgRead({from, userid, num}) {
+  return { type: MSG_READ, payload: { from, userid, num } }
+}
 
 export function msgList(msgs, users, userid) {
   return { type: MSG_LIST, payload: { msgs, users, userid } }
@@ -44,5 +48,18 @@ export function recvMsg(msgs) {
       const userid = getState().user._id
       dispatch(msgRecv(data, userid))
     })
+  }
+}
+
+// readMsg 标识已读信息
+export function readMsg(from) {
+  return (dispatch, getState) => {
+    axios.post('/user/readmsg', {from})
+      .then(res => {
+        const userid = getState().user._id
+        if(res.status === 200 && res.data.errCode === 0) {
+          dispatch(msgRead({userid, from, num:res.data.num}))
+        }
+      })
   }
 }
