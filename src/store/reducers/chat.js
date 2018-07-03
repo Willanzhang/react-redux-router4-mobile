@@ -6,6 +6,7 @@ const initState = {
 }
 
 function chat (state=initState, action) {
+  //  现在流程是 进页面 MSG_LIST先获取所有页面   MSG_RECV筛选和当前用户相关数据  MSG_READ 数据库是改变了，但redux数据要通过数据库修改数量手动修改 显示已读
   switch(action.type) {
     case MSG_LIST:
       return {...state, chatmsg:action.payload.msgs,users:action.payload.users, unread: action.payload.msgs.filter(v => !v.read&&v.to===action.payload.userid).length}

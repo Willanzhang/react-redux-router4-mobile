@@ -35,6 +35,7 @@ export function getMsgList() {
       })
   }
 }
+
 // 发送信息
 export function sendMsg({from, to, msg}) {
   return dispatch => {
