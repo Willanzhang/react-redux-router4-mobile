@@ -8,6 +8,8 @@ class Msg extends React.Component {
   componentDidMount() {
     let s = Object.values({ name: 'zbw', age: 123 }) // 返回 ["zbw", 123]
   }
+  componentDidUnmount() {
+  }  
   getLast(arr) {
     return arr[arr.length - 1]
   }
@@ -33,7 +35,7 @@ class Msg extends React.Component {
     // 1 eslint 代码校验工具
     // 2 react 16 特有的代码处理机制
     // 3 react 性能优化 服务端
-    
+
     // [1,11,10,2,3,4,5,21].sort(function(a,b){return a-b})
     // 根据chatid 分组
     return (

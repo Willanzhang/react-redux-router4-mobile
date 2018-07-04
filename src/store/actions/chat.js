@@ -42,6 +42,7 @@ export function sendMsg({from, to, msg}) {
     socket.emit('sendmsg', { from, to, msg })
   }
 }
+
 // receive 接收信息
 export function recvMsg(msgs) {
   return (dispatch, getState) => {

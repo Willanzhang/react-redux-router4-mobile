@@ -32,8 +32,6 @@ class Chat extends React.Component {
       this.props.getMsgList()
       this.props.recvMsg()
     }
-    const to = this.props.match.params.user
-    this.props.readMsg(to)
     // getQuery('name')
     // socket.on('recvmsg', (data)=>{
     //   this.setState({
@@ -41,6 +39,11 @@ class Chat extends React.Component {
     //   })
     // })
   }
+  componentWillUnmount() {
+    // 简单操作 处理聊天中 未读消息数量控制
+    const to = this.props.match.params.user
+    this.props.readMsg(to)
+  }  
   girdFix() {
     // 处理grid bug： 需点击才扩展开
     setTimeout(function () {
