@@ -15,7 +15,7 @@ function chat (state=initState, action) {
       return {...state, chatmsg:[...state.chatmsg,action.payload.msg],unread:unread}
     case MSG_READ:
       const { from, num} = action.payload
-      return {...state, chatmsg:state.chatmsg.map(v=> ({...v, read: from === v.from ? true : v.read})),unread:state.unread - num}
+      return {...state, chatmsg:state.chatmsg.map(v=> ({...v, read: from === v.from ? true : v.read})), unread:state.unread - num}
     default:
       return state
   }

@@ -21,8 +21,9 @@ const store = createStore(reducers,compose(
 	applyMiddleware(thunk),
 	reduxDevtools
 ))
+
 // const store = createStore(reducers)
 
-
+// 只使用中间件
 // const store = createStore(reducers,applyMiddleware(thunk))
 export default store
