@@ -5,6 +5,7 @@ import user from './reducers/user'
 import chatUser from './reducers/chatUser'
 import chat from './reducers/chat'
 import thunk from 'redux-thunk'
+// import thunk from '../redux-thunk'
 
 const reducers = combineReducers({
 	gun,
