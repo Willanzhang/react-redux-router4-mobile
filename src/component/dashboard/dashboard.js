@@ -9,6 +9,8 @@ import { getMsgList, recvMsg } from 'src/store/actions/chat'
 
 import User from 'component/user/user'
 import { connect } from 'react-redux'
+import QueueAnim from 'rc-queue-anim'
+
 
 @connect(state => state, { getMsgList, recvMsg })
 class Dashboard extends React.Component {
@@ -58,19 +60,32 @@ class Dashboard extends React.Component {
         component: User
       }
     ]
+    const page = navList.find(v => v.path === pathname)
+    console.log(page, 'page------')
     return <div className="dashboard">
       <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path === pathname) && navList.find(v => v.path === pathname).title}</NavBar>
       <div style={{ marginTop: 45 }}>
-        <Switch>
-          {navList.map(v =>
-            (<Route key={v.path} path={v.path} component={v.component}></Route>)
-          )}
-        </Switch>
+      <QueueAnim type="scaleX" duration={800}>
+        <Route key={page.path} path={page.path} component={page.component}></Route>
+      </QueueAnim>
       </div>
       <NavLinkBar
         data={navList}
         />
     </div>
+    // return <div className="dashboard">
+    //   <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path === pathname) && navList.find(v => v.path === pathname).title}</NavBar>
+    //   <div style={{ marginTop: 45 }}>
+    //     <Switch>
+    //       {navList.map(v =>
+    //         (<Route key={v.path} path={v.path} component={v.component}></Route>)
+    //       )}
+    //     </Switch>
+    //   </div>
+    //   <NavLinkBar
+    //     data={navList}
+    //     />
+    // </div>
   }
 }
 export default Dashboard

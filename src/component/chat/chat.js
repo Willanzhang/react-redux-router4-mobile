@@ -75,7 +75,6 @@ class Chat extends React.Component {
         >
         {users[userid].name}
       </NavBar>
-      <QueueAnim delay={100}>
         {chatmsgs.map((v, i) => {
           const avatar = require(`./imgs/${users[v.from].avatar}.png`)
           return v.from === userid ? (
@@ -94,7 +93,6 @@ class Chat extends React.Component {
               </List>
             )
         })}
-      </QueueAnim>
       <div className="stick-footer">
         <List>
           <InputItem
