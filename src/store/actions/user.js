@@ -44,18 +44,16 @@ export function login({user, pwd}) {
     return errorMsg('用户名密码必须输入')
   }
   return dispatch => {
-    axios.post('/user/login', {user, pwd})
-      .then(res => {
-        console.log(res.status, '000000000000000');
-        if(res.status === 200 && res.data.errCode === 0){
-          console.log(1111111)
-
-          dispatch(authSuccess(res.data.data))
-        } else {
-          console.log(2222222)
-          dispatch(errorMsg(res.data.errMsg))
-        }
-      })
+    axios.post('/user/login', {user, pwd}).then(res => {
+      console.log(res.status, '000000000000000');
+      if(res.status === 200 && res.data.errCode === 0){
+        console.log(1111111)
+        dispatch(authSuccess(res.data.data))
+      } else {
+        console.log(2222222)
+        dispatch(errorMsg(res.data.errMsg))
+      }
+    })
   }
 }
 // 退出登录
@@ -67,8 +65,7 @@ export function logout () {
 // 获取用户信息
 export function userInfo(callback) {
   return dispatch => {
-    axios.get('/user/info').
-    then(res => {
+    axios.get('/user/info').then(res => {
       if(res.status === 200 && res.data.errCode === 0){
         dispatch(loadData(res.data.data))
       } else {
@@ -86,8 +83,7 @@ export function register({user, pwd, type, repeatpwd}) {
     return errorMsg('密码和确认密码不同')
   }
   return dispatch => {
-    axios.post('/user/register', {user, pwd, type}).
-    then(res => {
+    axios.post('/user/register', {user, pwd, type}).then(res => {
       if(res.status === 200 && res.data.errCode === 0){
         dispatch(authSuccess({user, pwd, type}))
       } else {
@@ -99,13 +95,12 @@ export function register({user, pwd, type, repeatpwd}) {
 // 更新boss信息
 export function update (data) {
   return dispatch => {
-    axios.post('/user/update',data)
-      .then( res=> {
-        if(res.status === 200 && res.data.errCode === 0){
-          dispatch(authSuccess(res.data.data))
-        } else {
-          dispatch(errorMsg(res.data.errMsg))
-        }
-      })
+    axios.post('/user/update',data).then( res=> {
+      if(res.status === 200 && res.data.errCode === 0){
+        dispatch(authSuccess(res.data.data))
+      } else {
+        dispatch(errorMsg(res.data.errMsg))
+      }
+    })
   }
 }

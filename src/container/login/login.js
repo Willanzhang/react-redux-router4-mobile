@@ -1,6 +1,6 @@
 import React from 'react'
 import './login.styl'
-import { List, InputItem, WingBlank, WhiteSpace, Button, Radio } from 'antd-mobile'
+import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
 import Logo from 'component/logo/logo'
 import { connect } from 'react-redux'
 import { login } from 'src/store/actions/user'

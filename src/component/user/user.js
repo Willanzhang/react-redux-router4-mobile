@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { WhiteSpace, WingBlank, Result, List, Modal } from 'antd-mobile'
+import { WhiteSpace, Result, List, Modal } from 'antd-mobile'
 import browserCookie from 'browser-cookies'
 import './user.styl'
 import { logout } from 'src/store/actions/user'

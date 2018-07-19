@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 )
 class Msg extends React.Component {
   componentDidMount() {
-    let s = Object.values({ name: 'zbw', age: 123 }) // 返回 ["zbw", 123]
+    // let s = Object.values({ name: 'zbw', age: 123 }) // 返回 ["zbw", 123]
   }
   componentWillUnmount() {
   }  

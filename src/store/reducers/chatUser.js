@@ -1,5 +1,5 @@
 import {USER_LIST} from '../actions/chatUser'
-import {getRedirectPath} from 'common/utils'
+// import {getRedirectPath} from 'common/utils'
 const initState = {
   userList: []
 }

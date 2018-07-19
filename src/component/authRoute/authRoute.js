@@ -1,6 +1,6 @@
 import React from 'react'
 import './authRoute.styl'
-import axios from 'axios'
+// import axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { userInfo } from 'src/store/actions/user'

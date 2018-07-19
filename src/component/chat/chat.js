@@ -1,12 +1,13 @@
 import React from 'react'
 import { InputItem, List, NavBar, Icon, Grid } from 'antd-mobile'
-import { getQuery, getChatId } from 'common/utils.js'
+import { getChatId } from 'common/utils.js'
 import { connect } from 'react-redux'
+import QueueAnim from 'rc-queue-anim'
 import { getMsgList, sendMsg, recvMsg, readMsg } from 'src/store/actions/chat'
 import './chat.styl'
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 // 由于当前是跨域  前端端口是3000 后端是9093 需要手动连接  否则 可以直接 io()
-const socket = io('ws://localhost:9093')
+// const socket = io('ws://localhost:9093')
 @connect(state => state, { getMsgList, sendMsg, recvMsg, readMsg })
 class Chat extends React.Component {
   constructor(props) {
@@ -56,7 +57,7 @@ class Chat extends React.Component {
       .filter(v => v)
       .map(v => ({ text: v }))
     const Item = List.Item
-    const user = this.props.user.user
+    // const user = this.props.user.user
     const userid = this.props.match.params.user
     const users = this.props.chat.users
     if (!users[userid]) {
@@ -74,24 +75,26 @@ class Chat extends React.Component {
         >
         {users[userid].name}
       </NavBar>
-      {chatmsgs.map((v, i) => {
-        const avatar = require(`./imgs/${users[v.from].avatar}.png`)
-        return v.from === userid ? (
-          <List key={v._id}>
-            <Item
-              thumb={avatar}
-              >{v.content}</Item>
-          </List>
-        ) : (
+      <QueueAnim delay={100}>
+        {chatmsgs.map((v, i) => {
+          const avatar = require(`./imgs/${users[v.from].avatar}.png`)
+          return v.from === userid ? (
             <List key={v._id}>
               <Item
-                id="chat-me"
-                extra={<img src={avatar} />}
-                className="chat-me"
+                thumb={avatar}
                 >{v.content}</Item>
             </List>
-          )
-      })}
+          ) : (
+              <List key={v._id}>
+                <Item
+                  id="chat-me"
+                  extra={<img src={avatar} alt="头像"/>}
+                  className="chat-me"
+                  >{v.content}</Item>
+              </List>
+            )
+        })}
+      </QueueAnim>
       <div className="stick-footer">
         <List>
           <InputItem
