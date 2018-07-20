@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
 import NavLinkBar from 'component/navLink/navLink'
 import Boss from 'component/boss/boss'
