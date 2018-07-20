@@ -103,13 +103,14 @@ class Chat extends React.Component {
               <div>
                 <span style={{ marginRight: '.15rem' }} onClick={() => { 
                   this.setState({ showEmoji: !this.state.showEmoji })
+                  console.log(this.state.showEmoji, 'showEmoji')
                   this.girdFix()
                 }}>😀</span>
                 <span onClick={() => this.handleSubmit()}>发送</span>
               </div>
             }
             >信息
-        </InputItem>
+          </InputItem>
           {this.state.showEmoji ?
             <Grid
               data={emoji}
@@ -125,7 +126,6 @@ class Chat extends React.Component {
               /> :
             null
           }
-
         </List>
       </div>
     </div>
