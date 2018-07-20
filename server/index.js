@@ -41,7 +41,7 @@ app.use(function(req, res,next){
 	if (req.url.startsWith('/user/') || req.url.startsWith('/static/')) {
 		return next()
 	}
-	console.log('ptch reslove', path.resolve('build/index.html'));
+	// console.log('ptch reslove', path.resolve('build/index.html'));
 	// 否则返回 index.html 文件
 	return res.sendFile(path.resolve('build/index.html'))
 })
