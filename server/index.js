@@ -3,6 +3,10 @@ const userRouter = require('./user')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const models = require('./model')
+import React from 'react'
+function App () {
+	return <h2>hello world</h2>
+}
 const Chat = models.getModel('chat') // 获取表chat
 const app = express()
 const path = require('path')
@@ -11,6 +15,7 @@ const server = require('http').Server(app)
 // 删除聊天所有数据
 // Chat.remove({},function(err, doc){
 // })
+
 const io = require('socket.io')(server)
 io.on('connection', function (socket) {
 	socket.on('sendmsg', function (data) {
