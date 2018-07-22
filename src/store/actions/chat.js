@@ -1,5 +1,6 @@
 import axios from 'axios'
 import io from 'socket.io-client'
+import { CLIENT_RENEG_LIMIT } from 'tls';
 // 由于当前是跨域  前端端口是3000 后端是9093 需要手动连接  否则 可以直接 io()
 const socket = io('ws://localhost:9093')
 // 获取聊天列表
@@ -39,6 +40,7 @@ export function getMsgList() {
 // 发送信息
 export function sendMsg({from, to, msg}) {
   return dispatch => {
+    console.log(msg, 'client***********')
     socket.emit('sendmsg', { from, to, msg })
   }
 }
