@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 // 连接数据库
-const DB_URL = 'mongodb://127.0.0.1:27017/user'
+// const DB_URL = 'mongodb://127.0.0.1:27017/user'
+const DB_URL = 'mongodb://47.106.156.14:27017/user'
 mongoose.connect(DB_URL)
 mongoose.connection.on('connected', function() {
     //链接成功后的回调函数
