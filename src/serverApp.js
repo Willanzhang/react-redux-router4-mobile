@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React, { Component } from 'react'
-import AuthRoute from 'component/authRoute/authRoute'
+import AuthRoute from './component/authRoute/authRoute'
 // import Dashboard from 'component/dashboard/dashboard'
 
 function asyncComponent(importComponent) {

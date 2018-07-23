@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker'
 import store from 'src/store'
 import { Provider } from 'react-redux'
 import Router from 'src/routes'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './axios'
 import 'common/js/rem'
 // 使用 immutable.js 后
@@ -35,8 +36,10 @@ console.log(foo === bar)  //  打印 false
 // let a1 = a.set('name', 'bowen')
 ReactDOM.render(
 	<Provider store={store}>
-		<Router>
-		</Router>
+		<BrowserRouter>
+			<Router>
+			</Router>
+		</BrowserRouter>
 	</Provider>, document.getElementById('root'));
 // store.subscribe(render)
 registerServiceWorker();
