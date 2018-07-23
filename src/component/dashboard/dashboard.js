@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
     }
   }
   render() {
-    const { pathname } = this.props.location
+    let { pathname } = this.props.location
     console.log(pathname)
     const user = this.props.user
     // const hehe = [1, 2, 3, 4, 5]
@@ -60,6 +60,10 @@ class Dashboard extends React.Component {
         component: User
       }
     ]
+    if (pathname === "/") {
+      this.props.history.push('/me')
+      return false
+    }
     const page = navList.find(v => v.path === pathname)
     console.log(page, 'page------')
     return <div className="dashboard">
