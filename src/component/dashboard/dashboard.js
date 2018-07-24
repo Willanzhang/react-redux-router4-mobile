@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { NavBar } from 'antd-mobile'
 import NavLinkBar from 'component/navLink/navLink'
 import Boss from 'component/boss/boss'
@@ -61,12 +61,12 @@ class Dashboard extends React.Component {
       }
     ]
     if (pathname === "/") {
-      this.props.history.push('/me')
-      return false
+      // this.props.history.push('/me')
+      // return false
     }
     const page = navList.find(v => v.path === pathname)
     console.log(page, 'page------')
-    return <div className="dashboard">
+    return page? (<div className="dashboard">
       <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path === pathname) && navList.find(v => v.path === pathname).title}</NavBar>
       <div style={{ marginTop: 45 }}>
       <QueueAnim type="scaleX" duration={800}>
@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
       <NavLinkBar
         data={navList}
         />
-    </div>
+      </div>):<Redirect to="/msg"></Redirect>
     // return <div className="dashboard">
     //   <NavBar className="fixd-header" mode='dard'>{navList.find(v => v.path === pathname) && navList.find(v => v.path === pathname).title}</NavBar>
     //   <div style={{ marginTop: 45 }}>

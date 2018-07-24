@@ -34,7 +34,11 @@ console.log(foo === bar)  //  打印 false
 //   filter: Map({ name: 'Cam' })
 // })
 // let a1 = a.set('name', 'bowen')
-ReactDOM.render(
+
+
+// If you use ReactDOM.hydrate to start web application, you will see this warning.
+// If your application is not ssr, please use ReactDOM.render to start. 
+ReactDOM.hydrate(
 	<Provider store={store}>
 		<BrowserRouter>
 			<Router>

@@ -41,7 +41,20 @@ const Chat = asyncComponent(() => import("component/chat/chat"))
 
 // boss genius me msg 4个页面
 class Routers extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      hasError: false
+    }
+  }
+  componentDidCatch(err, info) {
+    console.log(err, info, 'err info')
+    this.setState({
+      hasError: true
+    })
+  }
   render() {
+    // <Route  exact path='/login/xx' component={Login}></Route>
     const app = (<div>
           <AuthRoute></AuthRoute>
           <Switch>
@@ -53,7 +66,8 @@ class Routers extends Component {
             <Route component={Dashboard}></Route>
           </Switch> 
     </div>)
-    return app
+    console.log(this.state.hasError, 'haserror')
+    return this.state.hasError? <h2>页面出错了</h2>:app
   }
 }
 export default Routers

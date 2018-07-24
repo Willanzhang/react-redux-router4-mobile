@@ -14,7 +14,7 @@ import assethook from 'asset-require-hook'
 assethook({
   extensions: ['jpg']
 })
-import {renderToStaticMarkup, renderToString} from 'react-dom/server'
+import {renderToStaticMarkup, renderToString, renderToNodeStream} from 'react-dom/server'
 import ServerApp from '../src/serverApp.js'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -83,7 +83,37 @@ app.use(function(req, res,next){
 	// console.log('ptch reslove', path.resolve('build/index.html'));
 	// 否则返回 index.html 文件
 	let context = {} // 如果路由有跳转 context 能告诉我们是否有跳转
-	const htmlRes = renderToString(<Provider store={store}>
+	// const htmlRes = renderToString(<Provider store={store}>
+	// 	<StaticRouter
+	// 		location={req.url}
+	// 	>
+	// 		<Router>
+	// 		</Router>
+	// 	</StaticRouter>
+	// </Provider>)
+
+	res.write(`<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+		<link rel="stylesheet" href="/${staticPath['main.css']}">
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">`)
+	// 使用renderToNodeStream
+	const markupStream = renderToNodeStream(<Provider store={store}>
 		<StaticRouter
 			location={req.url}
 		>
@@ -91,6 +121,14 @@ app.use(function(req, res,next){
 			</Router>
 		</StaticRouter>
 	</Provider>)
+	markupStream.pipe(res, {end: false})
+	markupStream.on('end', () => {
+		res.write(`</div>
+			<script src="/${staticPath['main.js']}"></script>
+		</body>
+	</html>`)
+		res.end()
+	})
 	const pageHtml = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -115,7 +153,7 @@ app.use(function(req, res,next){
   </body>
 </html>
 `
-	return res.send(pageHtml)
+	// return res.send(pageHtml)
 	// return res.sendFile(path.resolve('build/index.html'))
 })
 app.use('/',express.static(path.resolve('build'))) // 设置静态资源
