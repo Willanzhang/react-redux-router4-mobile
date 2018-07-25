@@ -14,6 +14,16 @@ import assethook from 'asset-require-hook'
 assethook({
   extensions: ['jpg']
 })
+import stylus from 'stylus'
+csshook({
+  extensions: ['.styl', 'stylus'],
+  preprocessCss: function (css, filename) {
+    return stylus(css)
+      .set('filename', filename)
+      .render()
+  },
+})
+
 import {renderToStaticMarkup, renderToString, renderToNodeStream} from 'react-dom/server'
 import ServerApp from '../src/serverApp.js'
 import { StaticRouter } from 'react-router-dom'
