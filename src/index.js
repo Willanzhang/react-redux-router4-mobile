@@ -14,10 +14,10 @@ import 'common/js/rem'
 import Immutable from 'immutable'
 // import { Map} from 'immutable'
 // import { createSelector } from 'reselect'
-let foo = Immutable.fromJS({a: {b: 1}})
-let bar = foo.setIn(['a', 'b'], 2)  // 使用 setIn 赋值
-console.log(foo.getIn(['a', 'b']), )  // 使用 getIn 取值，打印 1
-console.log(foo === bar)  //  打印 false
+// let foo = Immutable.fromJS({a: {b: 1}})
+// let bar = foo.setIn(['a', 'b'], 2)  // 使用 setIn 赋值
+// console.log(foo.getIn(['a', 'b']), )  // 使用 getIn 取值，打印 1
+// console.log(foo === bar)  //  打印 false
 // immutable 优点
 // 1 减少内存使用
 // 2 并发安全

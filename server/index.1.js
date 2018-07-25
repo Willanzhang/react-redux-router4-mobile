@@ -8,11 +8,12 @@ import React from 'react'
 
 // npm i -S css-modules-require-hook
 // css-modules-require-hook
-import csshook from 'css-modules-require-hook/preset' // import hook before routes 引入必须在 jsx 组件之前
+import csshook from 'css-modules-require-hook' // import hook before routes 引入必须在 jsx 组件之前
 import assethook from 'asset-require-hook'
 // 只能处理require 的图片..
 assethook({
-  extensions: ['jpg']
+  extensions: ['jpg', 'png', 'gif', 'webp'],
+	limit: 8000
 })
 import stylus from 'stylus'
 csshook({
@@ -22,10 +23,13 @@ csshook({
       .set('filename', filename)
       .render()
   },
+	camelCase: true,
+	generateScopedName: '[name]__[local]__[hash:base64:8]'
 })
 
 import {renderToStaticMarkup, renderToString, renderToNodeStream} from 'react-dom/server'
-import ServerApp from '../src/serverApp.js'
+// import ServerApp from '../src/serverApp.js'
+import ServerApp from '../src/routes/index.js'
 import { StaticRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
@@ -49,13 +53,13 @@ const store = createStore(reducers,compose(
 	applyMiddleware(thunk)
 ))
 // react 组件 => div
-function App () {
-	return <div>
-		<h2>server render</h2>
-		<h2>hello world</h2>
-	</div>
-}
-console.log(renderToString(<App/>));
+// function App () {
+// 	return <div>
+// 		<h2>server render</h2>
+// 		<h2>hello world</h2>
+// 	</div>
+// }
+// console.log(renderToString(<App/>));
 const Chat = models.getModel('chat') // 获取表chat
 const app = express()
 const path = require('path')
@@ -75,7 +79,6 @@ io.on('connection', function (socket) {
 				io.emit('recvmsg', Object.assign({},doc._doc))
 			}
 		})
-		console.log(data, 1111)
 		// 接受到事件后 发送全局事件
 		// io.emit('recvmsg', data)
 	})
@@ -92,13 +95,11 @@ app.use(function(req, res,next){
 	}
 	// console.log('ptch reslove', path.resolve('build/index.html'));
 	// 否则返回 index.html 文件
-	let context = {} // 如果路由有跳转 context 能告诉我们是否有跳转
+	const  context = {} // 如果路由有跳转 context 能告诉我们是否有跳转
 	// const htmlRes = renderToString(<Provider store={store}>
-	// 	<StaticRouter
-	// 		location={req.url}
-	// 	>
-	// 		<Router>
-	// 		</Router>
+	// 	<StaticRouter location={req.url} context={context}>
+	// 		<ServerApp>
+	// 		</ServerApp>
 	// 	</StaticRouter>
 	// </Provider>)
 
@@ -106,6 +107,7 @@ app.use(function(req, res,next){
 <html lang="en">
   <head>
     <meta charset="utf-8">
+		<link rel="stylesheet" href="/${staticPath['main.css']}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <!--
@@ -114,7 +116,6 @@ app.use(function(req, res,next){
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-		<link rel="stylesheet" href="/${staticPath['main.css']}">
     <title>React App</title>
   </head>
   <body>
@@ -125,10 +126,11 @@ app.use(function(req, res,next){
 	// 使用renderToNodeStream
 	const markupStream = renderToNodeStream(<Provider store={store}>
 		<StaticRouter
+			context={context}
 			location={req.url}
 		>
-			<Router>
-			</Router>
+			<ServerApp>
+			</ServerApp>
 		</StaticRouter>
 	</Provider>)
 	markupStream.pipe(res, {end: false})
@@ -139,32 +141,33 @@ app.use(function(req, res,next){
 	</html>`)
 		res.end()
 	})
-	const pageHtml = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-		<link rel="stylesheet" href="/${staticPath['main.css']}">
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root">${htmlRes}</div>
-		<script src="/${staticPath['main.js']}"></script>
-  </body>
-</html>
-`
-	// return res.send(pageHtml)
-	// return res.sendFile(path.resolve('build/index.html'))
+
+// 	const pageHtml = `<!DOCTYPE html>
+// <html lang="en">
+//   <head>
+//     <meta charset="utf-8">
+//     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+//     <meta name="theme-color" content="#000000">
+//     <!--
+//       manifest.json provides metadata used when your web app is added to the
+//       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+//     -->
+//     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+//     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+// 		<link rel="stylesheet" href="/${staticPath['main.css']}">
+//     <title>React App</title>
+//   </head>
+//   <body>
+//     <noscript>
+//       You need to enable JavaScript to run this app.
+//     </noscript>
+//     <div id="root">${htmlRes}</div>
+// 		<script src="/${staticPath['main.js']}"></script>
+//   </body>
+// </html>
+// `
+	// return res.send(pageHtml) // react 15 服务端渲染
+	// return res.sendFile(path.resolve('build/index.html')) // 正常客户端渲染
 })
 app.use('/',express.static(path.resolve('build'))) // 设置静态资源
 // app.get('/',function (req, res) {

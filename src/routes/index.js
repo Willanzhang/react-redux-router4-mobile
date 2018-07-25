@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React, { Component } from 'react'
-import AuthRoute from 'component/authRoute/authRoute'
+import AuthRoute from '../component/authRoute/authRoute'
 // import Dashboard from 'component/dashboard/dashboard'
 
 function asyncComponent(importComponent) {
@@ -13,7 +13,6 @@ function asyncComponent(importComponent) {
     }
     async componentDidMount() {
       const { default: component } = await importComponent()
-      console.log(1110000000000000)
       this.setState({
         component: component
       })
@@ -48,7 +47,6 @@ class Routers extends Component {
     }
   }
   componentDidCatch(err, info) {
-    console.log(err, info, 'err info')
     this.setState({
       hasError: true
     })
@@ -66,7 +64,6 @@ class Routers extends Component {
             <Route component={Dashboard}></Route>
           </Switch> 
     </div>)
-    console.log(this.state.hasError, 'haserror')
     return this.state.hasError? <h2>页面出错了</h2>:app
   }
 }

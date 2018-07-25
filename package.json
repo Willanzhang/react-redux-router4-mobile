@@ -71,7 +71,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server": "cross-env NODE_ENV=test nodemon --exec babel-node server/index.js",
+    "server": "cross-env NODE_ENV=test nodemon --exec babel-node server/index.1.js",
     "server_bak": "nodemon index"
   },
   "jest": {

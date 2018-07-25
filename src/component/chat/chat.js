@@ -1,9 +1,9 @@
 import React from 'react'
 import { InputItem, List, NavBar, Icon, Grid } from 'antd-mobile'
-import { getChatId } from 'common/utils.js'
+import { getChatId } from '../../common/utils.js'
 import { connect } from 'react-redux'
 import QueueAnim from 'rc-queue-anim'
-import { getMsgList, sendMsg, recvMsg, readMsg } from 'src/store/actions/chat'
+import { getMsgList, sendMsg, recvMsg, readMsg } from '../../store/actions/chat'
 import './chat.styl'
 // import io from 'socket.io-client'
 // 由于当前是跨域  前端端口是3000 后端是9093 需要手动连接  否则 可以直接 io()

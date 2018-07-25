@@ -1,9 +1,9 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import {NavBar, InputItem, TextareaItem, Button ,WhiteSpace} from 'antd-mobile'
-import AvatarSelector from 'component/avatarSelector/avatarSelector'
+import AvatarSelector from '../../component/avatarSelector/avatarSelector'
 import { connect} from 'react-redux'
-import { update } from 'src/store/actions/user'
+import { update } from '../../store/actions/user'
 
 @connect(
   state => state.user,

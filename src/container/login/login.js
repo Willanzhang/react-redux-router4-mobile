@@ -1,11 +1,11 @@
 import React from 'react'
 import './login.styl'
 import { List, InputItem, WingBlank, WhiteSpace, Button } from 'antd-mobile'
-import Logo from 'component/logo/logo'
+import Logo from '../../component/logo/logo'
 import { connect } from 'react-redux'
-import { login } from 'src/store/actions/user'
+import { login } from '../../store/actions/user'
 import { Redirect } from 'react-router-dom'
-import Form from 'component/form/form'
+import Form from '../../component/form/form'
 
 // function WrapperHello(Comp) {
 //   // class WarpComp extends React.Component {

@@ -1,9 +1,9 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
-import Logo from 'component/logo/logo'
+import Logo from '../../component/logo/logo'
 import { List, InputItem, WhiteSpace, Radio, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { register } from 'src/store/actions/user'
+import { register } from '../../store/actions/user'
 @connect(state => ({
   state: state.user
 }), {

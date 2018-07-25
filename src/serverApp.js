@@ -13,7 +13,6 @@ function asyncComponent(importComponent) {
     }
     async componentDidMount() {
       const { default: component } = await importComponent()
-      console.log(1110000000000000)
       this.setState({
         component: component
       })

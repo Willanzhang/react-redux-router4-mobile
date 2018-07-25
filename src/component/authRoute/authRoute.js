@@ -3,7 +3,7 @@ import './authRoute.styl'
 // import axios from 'axios'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { userInfo } from 'src/store/actions/user'
+import { userInfo } from '../../store/actions/user'
 // import { register } from 'src/store/actions/user'
 @withRouter
 @connect(null,{userInfo})

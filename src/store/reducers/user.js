@@ -1,5 +1,5 @@
 import {AUTH_SUCCESS, ERROR_MSG, LOAD_DATA, LOGOUT} from '../actions/user'
-import {getRedirectPath} from 'common/utils'
+import {getRedirectPath} from '../../common/utils'
 const initState = {
   redirectTo: '',
   msg: '',
