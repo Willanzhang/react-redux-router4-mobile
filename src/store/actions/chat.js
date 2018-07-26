@@ -3,7 +3,7 @@ import io from 'socket.io-client'
 import { CLIENT_RENEG_LIMIT } from 'tls';
 // 由于当前是跨域  前端端口是3000 后端是9093 需要手动连接  否则 可以直接 io()
 // const socket = io('ws://127.0.0.1:9093')
-const socket = io()
+const socket = io('ws://')
 // 获取聊天列表
 export const MSG_LIST = 'MSG_LIST'
 
