@@ -76,8 +76,9 @@ Chat.find(function(e, d) {
 })
 const io = require('socket.io')(server)
 io.on('connection', function (socket) {
+	console.log('connection连接成功')
 	socket.on('sendmsg', function (data) {
-		console.log('socket连接成功')
+		console.log('sendmsg')
 		const { from, to, msg } = data
 		const chatid = [from, to].sort().join('_')
 		Chat.create({ chatid, from, to, content: msg}, function (err, doc) {
