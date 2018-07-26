@@ -42,17 +42,6 @@ import chat from '../src/store/reducers/chat'
 import thunk from 'redux-thunk'
 import staticPath from '../build/asset-manifest.json'
 
-// app.use(compression())
-app.use(compression({filter: shouldCompress}))
-
-function shouldCompress (req, res) {
-  if (req.headers['x-no-compression']) {
-    // 这里就过滤掉了请求头包含'x-no-compression'
-    return false
-  }
-
-  return compression.filter(req, res)
-}
 
 const reducers = combineReducers({
 	gun,
@@ -95,7 +84,17 @@ io.on('connection', function (socket) {
 	})
 	// console.log('user login')
 })
+// app.use(compression())
+app.use(compression({filter: shouldCompress}))
 
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // 这里就过滤掉了请求头包含'x-no-compression'
+    return false
+  }
+
+  return compression.filter(req, res)
+}
 
 app.use(cookieParser()) // 操作cookie
 app.use(bodyParser.json()) // 处理post请求
