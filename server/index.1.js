@@ -3,6 +3,7 @@ const userRouter = require('./user')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const models = require('./model')
+const compression = require('compression')
 
 import React from 'react'
 
@@ -84,6 +85,19 @@ io.on('connection', function (socket) {
 	})
 	// console.log('user login')
 })
+
+// app.use(compression())
+app.use(compression({filter: shouldCompress}))
+
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // 这里就过滤掉了请求头包含'x-no-compression'
+    return false
+  }
+
+  return compression.filter(req, res)
+}
+
 app.use(cookieParser()) // 操作cookie
 app.use(bodyParser.json()) // 处理post请求
 app.use('/user', userRouter) // 路由
