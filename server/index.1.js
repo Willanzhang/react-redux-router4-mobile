@@ -69,7 +69,11 @@ const server = require('http').Server(app)
 // 删除聊天所有数据
 // Chat.remove({},function(err, doc){
 // })
-
+Chat.find(function(e, d) {
+	if(!e) {
+		console.log(d)
+	}
+})
 const io = require('socket.io')(server)
 io.on('connection', function (socket) {
 	socket.on('sendmsg', function (data) {
