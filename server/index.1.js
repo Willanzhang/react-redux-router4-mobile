@@ -193,7 +193,7 @@ app.use('/',express.static(path.resolve('build'))) // 设置静态资源
 // 	age: 20
 // })
 // })
-server.listen(9093, function () {
+server.listen(9099, function () {
 	console.log('node app:9093 ')
 })
 

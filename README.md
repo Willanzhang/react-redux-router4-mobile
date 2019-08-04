@@ -1,4 +1,12 @@
 ## 完整项目学习
+```
+做完一年了，一直是自己学习使用，打开忘了是什么项目了，
+
+新学到的有：
+使用socket.io
+moogodb 的读写入 （有空部署下redis）
+服务端渲染
+```
 
 ## develop 是关于服务端渲染的分支
 ```
@@ -6,8 +14,7 @@
 以及css-modules-require-hook 处理 stylus
     asset-require-hook 处理图片
 ```
-## 思考
+## 执行
 ```
-server渲染的 server生产环境 即依赖client 开发环境 又依赖client build后的打包文件导致 
-需要将整个项目需要部署到 web服务器上  开玩笑吧....
+
 ```
