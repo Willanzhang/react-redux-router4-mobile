@@ -1,5 +1,5 @@
 ## 完整项目学习
-[地址](https://www.zhangbowen.club)
+[预览地址](https://www.zhangbowen.club)
 ```
 做完一年了，一直是自己学习使用，发现服务器被我东搞西搞的mongo被我搞没了，
 
