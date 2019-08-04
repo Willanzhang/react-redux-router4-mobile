@@ -7,7 +7,7 @@
 做完一年了，一直是自己学习使用，发现服务器东搞西搞的mongo被我搞没了，
 
 
-使用socket.io
+使用socket.io(使用nginx 有点小问题)
 moogodb 的读写入 （有空部署下redis）
 服务端渲染
 ```
